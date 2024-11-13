@@ -1,0 +1,232 @@
+\documentclass[14pt, bibliography=totoc, index=totoc, listof=totoc]{report}
+    % language characters and special characters
+    \usepackage[utf8]{inputenc}
+
+    % coding of characters in pdf documents
+    \usepackage[T1]{fontenc}
+
+    % decrease distance between figure and caption
+    \usepackage[skip=5pt]{caption}
+
+    % to configure spacing on enumeration items
+    \usepackage{enumitem}
+    
+    % used to specify the paragraph indent
+    \usepackage{parskip}
+
+    % for specifying column width in tables
+    \usepackage{array}
+
+    % for using code listings with \lstlisting
+    \usepackage{listings}
+
+    % for using \multicolumn
+    \usepackage{multirow}
+
+    % for colored text
+    \usepackage{xcolor}
+
+    % for more text sizes
+    % from smallest to largest:
+    % \tiny         5pt
+    % \scriptsize   7pt
+    % \footnotesize 8pt
+    % \small        9pt
+    % \normalsize   10pt
+    % \large        12pt
+    % \Large        14.4pt
+    % \LARGE        17.28pt
+    % \huge         20.74pt
+    % \Huge         24.88pt
+    \usepackage{extsizes}
+
+    % for adding links using \href{link}{text} or \url{link} and references (\ref{}) to chapters
+    \usepackage{hyperref}
+
+    % removing the book margin
+    % setting the size and position(?) of the header, so header line with chapter and section is in the right position
+    % setting where the page ends as well
+    \usepackage[nomarginpar, margin=.9in, headsep=1.05cm,headheight=0.35cm, top=3.2cm, bottom=2cm]{geometry}
+
+    % configuring the graphicx package to use specified path automatically
+    \usepackage{graphicx}
+    % use images by using \includegraphics{img_without_extension}
+    \graphicspath{{img/}}
+
+    % times new roman font
+    \usepackage{times}
+
+    % in order to use [H] (precise positioning) on figures
+    \usepackage{float}
+
+    % nice chapter header
+    % other options: https://mirror.easyname.at/ctan/macros/latex/contrib/fncychap/fncychap.pdf
+    \usepackage[Bjornstrup]{fncychap}
+
+    % used to generate lorem ipsum
+    \usepackage{lipsum}
+
+    % adding a header line with the chapter name
+    \usepackage{fancyhdr}
+
+    % configuring chapter distances
+    \usepackage{etoolbox}
+
+    \pagestyle{fancy}
+    % clear only header, not footer! (\fancyhf)
+    \fancyhead{}
+    % on an odd page number (in this case, on every page), show the chapter on the left side and the section on the right side
+    % leftmark == chapter name
+    % rightmark == section name
+    \fancyhead[OL]{\small\nouppercase\leftmark}
+    \fancyhead[OR]{\small\nouppercase\rightmark}
+    % show page number on left side of header
+    % \fancyhead[OL]{\thepage}
+
+    % the following lines are used because otherwise, the "Chapter 1: Blabla" text on a new chapter is in the middle of the page, which bothers me
+    \makeatletter
+    % decrease space before a numbered chapter
+    \patchcmd{\@makechapterhead}{\vspace*{50\p@}}{\vspace*{-90\p@}}{}{}
+    % decrease space before an unnumbered chapter
+    \patchcmd{\@makeschapterhead}{\vspace*{50\p@}}{\vspace*{-66\p@}}{}{}
+    % decrease space after a numbered chapter
+    \patchcmd{\DOTI}{\vskip 40\p@}{\vskip 20\p@}{}{}
+    % decrease space after an unnumbered chapter
+    \patchcmd{\DOTIS}{\vskip 40\p@}{\vskip -20\p@}{}{}
+
+    % code listings
+    \definecolor{code-backcolor}{RGB}{245, 245, 237}
+    \lstset{
+        breaklines=true,
+        escapeinside={(*}{*)},
+        backgroundcolor=\color{code-backcolor},
+        basicstyle=\ttfamily\small\linespread{0.4},
+        abovecaptionskip=9pt,
+        numbers=left,
+        stepnumber=1,
+        showstringspaces=false,
+        tabsize=2,
+        captionpos=b,
+        aboveskip=25px,
+        belowskip=0px,
+        breakatwhitespace=false,
+        xleftmargin=0.70cm,
+        % make sure umlauts can be printed in \lstlisting
+        % may need to be edited for other languages
+        literate=
+            {Ö}{{\"O}}1
+            {Ä}{{\"A}}1
+            {Ü}{{\"U}}1
+            {ß}{{\ss}}1
+            {ü}{{\"u}}1
+            {ä}{{\"a}}1
+            {ö}{{\"o}}1
+            {~}{{\textasciitilde}}1
+    }
+
+    % increasing length between paragraphs
+    \setlength{\parskip}{\baselineskip}%
+
+    % removing paragraph indent
+    \setlength{\parindent}{0pt}
+
+    % changing itemize and enumerate:
+    % less distance between top paragraph and list
+    % no distance between list items
+    % more distance after list and bottom paragraph
+    \setlist[itemize]{noitemsep, topsep=-10pt, after=\vspace{0.5cm}}
+    \setlist[enumerate]{noitemsep, topsep=-10pt, after=\vspace{0.5cm}}
+
+    % add space above images
+    \setlength{\intextsep}{10pt}
+
+    % add bibliography package
+    \usepackage[backend=biber,style=authoryear-comp,sorting=ynt]{biblatex}
+    \setlength{\bibitemsep}{0.9cm}
+    % set text for when a website was last visited (urldate)
+    \renewbibmacro*{urldate}{
+        (last visited on \printfield{urlday}.\printfield{urlmonth}.\printfield{urlyear})
+    }
+    
+    % add bibliography
+    \addbibresource{example-bibliography.bib}
+
+    % title page texts
+    \title{Sample}
+    \author{Author}
+    \date{\today}
+
+\begin{document}
+\maketitle % use title in document
+
+% print a table of contents
+\tableofcontents
+
+% print a list of figures
+\listoffigures
+
+% print a list of tables
+% \listoftables
+
+% print a table of code listings
+% \lstlistoflistings
+
+\chapter{Chapter}
+This is some sample text in a chapter.
+
+\section{Section}
+This is some sample text in a section.
+
+\subsection{Subsection}
+This is some sample text in a subsection.
+
+The following is an itemized list.
+\begin{itemize}
+    \item Item 1
+    \item Item 2
+    \item Item 3
+\end{itemize}
+
+The following is an enumerated list.
+\begin{enumerate}
+    \item Item 1
+    \item Item 2
+    \item Item 3
+\end{enumerate}
+
+This is \textit{italicized} text.
+
+This is \textbf{bold} text.
+
+This is \verb|inline code| text.
+
+The following is a \href{https://www.linux.org/}{link}.
+
+\pagebreak
+\section{Another section}
+Figure \ref{fig:example} shows an example image.
+
+\begin{figure}[H]
+	\centering
+	\vspace{0.4cm}
+	\fbox{\includegraphics[width=0.5\linewidth]{example_img}}
+	% \copyrightbox[r]{\fbox{\includegraphics[width=0.5\linewidth]{example_img}}}{\textcopyright\ Author (CC BY-SA 3.0)}
+	\caption{An image}
+	\label{fig:example}
+	\vspace{-0.4cm}
+\end{figure}
+
+Listing \ref{code:example} shows a piece of code.
+\begin{lstlisting}[caption=Code example, label=code:example, language=python]
+def lorem(ipsum : str) -> None:
+    print(ipsum)
+\end{lstlisting}
+
+\lipsum[1]
+\pagebreak
+
+This is an example for a citation \parencite{typo3-fluid-if-else}. Here is another example \parencite{linux-handbuch}. These works only show up in the final document's bibliography if they are cited somewhere.
+
+\printbibliography[heading=bibintoc, title={References}]
+
+\end{document}
